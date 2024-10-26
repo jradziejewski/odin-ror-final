@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  get 'users/index'
   root 'posts#index'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+
+  match '/users', to: 'users#index', via: 'get'
+  match '/users/:id',     to: 'users#show', via: 'get'
 
   resources :posts, only: [:index]
 
